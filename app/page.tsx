@@ -7,6 +7,7 @@ import { Button } from "./_components/ui/button";
 import ProductList from "./_components/product-list";
 import { db } from "./_lib/prisma";
 import RestaurantList from "./_components/restaurant-list";
+import Link from "next/link";
 
 const Home = async () => {
   const products = await db.product.findMany({
@@ -71,9 +72,12 @@ const Home = async () => {
           <Button
             variant="ghost"
             className="h-fit p-0 text-primary hover:bg-transparent"
+            asChild
           >
-            Ver todos
-            <ChevronRightIcon size={16} />
+            <Link href="/restaurants/recommended">
+              Ver todos
+              <ChevronRightIcon size={16} />
+            </Link>
           </Button>
         </div>
         <RestaurantList />
