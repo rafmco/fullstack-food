@@ -7,7 +7,7 @@ export const searchForRestaurants = async (search: string) => {
     where: {
       name: {
         contains: search,
-        mode: "insensitive",
+        // mode: "insensitive",
       },
     },
   });
