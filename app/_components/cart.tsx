@@ -26,7 +26,7 @@ const Cart = () => {
 
   const { data } = useSession();
 
-  const { products, subtotalPrice, totalPrice, totalDiscounts } =
+  const { products, subtotalPrice, totalPrice, totalDiscounts, clearCart } =
     useContext(CartContext);
 
   const handleFinishOrderClick = async () => {
