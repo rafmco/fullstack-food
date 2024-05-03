@@ -21,6 +21,7 @@ model Restaurant {
   deliveryTimeMinutes Int
   categories          Category[]
   products            Product[]
+  orders              Order[]
   createdAt           DateTime   @default(now())
 }
 
@@ -45,6 +46,41 @@ model Product {
   categoryId         String
   category           Category   @relation(fields: [categoryId], references: [id])
   createdAt          DateTime   @default(now())
+  orderProducts      OrderProduct[]
+}
+
+// Tabelas da Order
+model OrderProduct {
+  id        String  @id @default(uuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+}
+
+model Order {
+  id                  String         @id @default(uuid())
+  userId              String
+  user                User           @relation(fields: [userId], references: [id])
+  products            OrderProduct[]
+  restaurant          Restaurant     @relation(fields: [restaurantId], references: [id])
+  restaurantId        String
+  deliveryFee         Decimal        @db.Decimal(10, 2)
+  deliveryTimeMinutes Int
+  subtotalPrice       Decimal        @db.Decimal(10, 2)
+  totalPrice          Decimal        @db.Decimal(10, 2)
+  totalDiscounts      Decimal        @db.Decimal(10, 2)
+  createdAt           DateTime       @default(now())
+  status              OrderStatus
+}
+
+enum OrderStatus {
+  CONFIRMED
+  CANCELED
+  PREPARING
+  DELIVERING
+  COMPLETED
 }
 
 // Tabelas para Auth.js
@@ -86,6 +122,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  orders        Order[]
 
   @@map("users")
 }
