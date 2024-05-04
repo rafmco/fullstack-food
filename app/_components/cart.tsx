@@ -23,6 +23,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation";
 
 interface CartProps {
+  // eslint-disable-next-line no-unused-vars
   setIsOpen: (isOpen: boolean) => void;
 }
 
