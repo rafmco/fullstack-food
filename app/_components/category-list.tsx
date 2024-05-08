@@ -7,7 +7,7 @@ const CategoryList = async () => {
   // pegar as categorias do banco de dados
   // renderizar um item para cada categoria
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="-my-2 flex flex-row gap-3 overflow-x-scroll px-5 py-2 [&::-webkit-scrollbar]:hidden">
       {categories.map((category) => (
         <CategoryItem key={category.id} category={category} />
       ))}
